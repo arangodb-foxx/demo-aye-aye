@@ -13,5 +13,7 @@
       "assets/components/**",
       "assets/js/**"
     ]
-  }
+  },
+  "version": "1.0",
+  "name": "Aye_Aye"
 }
