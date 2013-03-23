@@ -12,6 +12,6 @@
     "app.js": [
       "assets/components/**",
       "assets/js/**"
-    ],
+    ]
   }
 }
