@@ -1,0 +1,17 @@
+{
+  "apps": {
+    "/ayeaye": "ayeaye.js"
+  },
+  "models": {
+    "todos": "models/todos.js"
+  },
+  "assets": {
+    "index.html": [
+      "assets/index.html"
+    ],
+    "app.js": [
+      "assets/components/**",
+      "assets/js/**"
+    ],
+  }
+}
