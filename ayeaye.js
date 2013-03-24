@@ -37,10 +37,10 @@
     app = new FoxxApplication({
       urlPrefix: "ayeaye"
     });
+
   
-  // Define the Modules needed within the App.
-  app.requires = {
-    arangodb: "org/arangodb"
+  app.models = {
+    todos: "models/todos"
   };
   
   // Define a GET event for the URL: prefix + /todos
