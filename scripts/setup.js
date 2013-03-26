@@ -1,5 +1,6 @@
 /*jslint indent: 2, nomen: true, maxlen: 100, white: true, plusplus: true, unparam: true */
-/*global exports, appCollection*/
+/*global todos*/
+/*global require, applicationContext*/
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A TODO-List Foxx-Application written for ArangoDB
@@ -28,26 +29,10 @@
 /// @author Copyright 2011-2013, triAGENS GmbH, Cologne, Germany
 ////////////////////////////////////////////////////////////////////////////////
 
-(function () {
+(function() {
   "use strict";
-  
-  // Define the save functionality
-  exports.save = function (content) {
-    appCollection("todos").save(content);
-  };
-  
-  // Define the functionality to remove one object from the collection
-  exports.destroy = function (id) {
-    appCollection("todos").remove(id);
-  };
-  
-  // Define the functionality to display all elements in the collection
-  exports.list = function () {
-    return appCollection("todos").toArray();
-  };
-  
-  // Define the functionality to replace one document.
-  exports.update = function (id, content) {
-    appCollection("todos").replace(id, content);
-  };
+
+  var db = require("org/arangodb").db;
+
+  db._create(appCollectionName("todos"));
 }());

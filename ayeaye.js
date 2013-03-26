@@ -34,13 +34,11 @@
 
   // Initialise a new FoxxApplication called app under the urlPrefix: "ayeaye".
   var FoxxApplication = require("org/arangodb/foxx").FoxxApplication,
-    app = new FoxxApplication({
-      urlPrefix: "ayeaye"
-    });
+    app = new FoxxApplication();
 
   
-  app.models = {
-    todos: "models/todos"
+  app.requiresModels = {
+    todos: "todos"
   };
   
   // Define a GET event for the URL: prefix + /todos
