@@ -10,21 +10,25 @@
   "teardown": "scripts/teardown.js",
 
   "assets": {
-    "index.html": [
-      "assets/index.html"
-    ],
+    "index.html": {
+      "files": [
+        "assets/index.html"
+      ]
+    },
 
-    "app.js": [
-      "assets/components/js/underscore/**",
-      "assets/components/js/jquery/**",
-      "assets/components/js/backbone/**",
-      "assets/components/js/todomvc-common/**",
-      "assets/js/models/**",
-      "assets/js/collections/**",
-      "assets/js/views/**",
-      "assets/js/routers/**",
-      "assets/js/app.js"
-    ],
+    "app.js": {
+      "files": [
+	"assets/components/js/underscore/**",
+	"assets/components/js/jquery/**",
+	"assets/components/js/backbone/**",
+	"assets/components/js/todomvc-common/**",
+	"assets/js/models/**",
+	"assets/js/collections/**",
+	"assets/js/views/**",
+	"assets/js/routers/**",
+	"assets/js/app.js"
+      ]
+    },
 
     "components/todomvc-common/base.css": [
       "assets/components/todomvc-common/base.css"
