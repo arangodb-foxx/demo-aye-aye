@@ -46,7 +46,9 @@
   app.get('/todos', function (req, res) {
     // Return the complete content of the Todos-Collection
     res.json(todos.list());
-  });  
+  }).nickname("Todos")
+  .summary("List of all Todos.")
+  .notes("This function simply returns the list of all todos"); 
 
   // Define a POST event for the URL: prefix + /todos
   // This is used to create a new Todo.
@@ -55,7 +57,9 @@
     // Trigger the save event of the model with
     // the given Request Body and return the result.
     res.json(todos.save(content));
-  });
+  }).nickname("Todos")
+  .summary("Create a new Todo")
+  .notes("Creates a new Todo-Item. The information has to be in the requestBody."); 
 
   // Define a PUT event for the URL: prefix + /todos/:todoid
   // This is used to update an existing Todo.
@@ -66,7 +70,10 @@
     // the given Request Body and id.
     // Then return the result.
     res.json(todos.update(id, content));
-  });
+  }).nickname("Todos")
+  .summary("Update a Todo")
+  .notes("Changes a Todo-Item. The information has to be in the requestBody."); 
+  
 
   // Define a DELETE event for the URL: prefix + /todos/:todoid
   // This is used to remove an existing Todo.
@@ -75,7 +82,16 @@
     // Trigger the remove event in the collection with
     // the given id and return the result.
     res.json(todos.destroy(id));
-  });
+  }).nickname("Todos")
+  .pathParam("id", {
+    description: "The id of the Todo-Item",
+    dataType: "string",
+    required: true,
+    multiple: false
+  })
+  .summary("Removes a Todo")
+  .notes("Removes a Todo-Item."); 
+  
 
   // Start the todo-list application.
   // Remember to give the applicationContext.
