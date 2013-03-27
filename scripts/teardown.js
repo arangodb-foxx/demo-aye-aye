@@ -36,13 +36,7 @@
   var arangodb = require("org/arangodb");
   var db = arangodb.db;
 
-  var todos = appCollectionName("todos");
+  var todos = appCollection("todos");
 
-
-  if (db._collection(todos) === null) {
-    db._create(appCollectionName("todos"));
-  }
-  else {
-    console.warn("collection '%s' already exists. Leaving it untouched.", todos);
-  }
+  todos.drop();
 }());
