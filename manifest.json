@@ -30,9 +30,11 @@
       ]
     },
 
-    "components/todomvc-common/base.css": [
-      "assets/components/todomvc-common/base.css"
-    ]
+    "components/todomvc-common/base.css": {
+      "files": [
+        "assets/components/todomvc-common/base.css"
+      ]
+    }
   },
 
   "files": {
