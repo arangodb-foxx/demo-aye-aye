@@ -1,6 +1,8 @@
 {
   "name": "aye_aye",
   "version": "1.0",
+  "description": "...",
+  "thumbnail": "...",
 
   "apps": {
     "/ayeaye": "ayeaye.js"
