@@ -46,7 +46,7 @@
   app.get('/todos', function (req, res) {
     // Return the complete content of the Todos-Collection
     res.json(todos.list());
-  }).nickname("Todos")
+  }).nickname("todos")
   .summary("List of all Todos.")
   .notes("This function simply returns the list of all todos"); 
 
@@ -57,7 +57,7 @@
     // Trigger the save event of the model with
     // the given Request Body and return the result.
     res.json(todos.save(content));
-  }).nickname("Todos")
+  }).nickname("todos")
   .summary("Create a new Todo")
   .notes("Creates a new Todo-Item. The information has to be in the requestBody."); 
 
@@ -70,7 +70,7 @@
     // the given Request Body and id.
     // Then return the result.
     res.json(todos.update(id, content));
-  }).nickname("Todos")
+  }).nickname("todos")
   .summary("Update a Todo")
   .notes("Changes a Todo-Item. The information has to be in the requestBody."); 
   
@@ -82,7 +82,7 @@
     // Trigger the remove event in the collection with
     // the given id and return the result.
     res.json(todos.destroy(id));
-  }).nickname("Todos")
+  }).nickname("todos")
   .pathParam("id", {
     description: "The id of the Todo-Item",
     dataType: "string",
