@@ -54,6 +54,6 @@
         this.collection.replace(id, content);
       }
     });
-  exports.repository = Ayeaye_Repository;
+  exports.Repository = Ayeaye_Repository;
   
 }());
