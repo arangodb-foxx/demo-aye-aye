@@ -1,6 +1,6 @@
 /*jslint indent: 2, nomen: true, maxlen: 100, white: true, plusplus: true, unparam: true */
 /*global todos*/
-/*global require, applicationContext*/
+/*global require, applicationContext, repositories*/
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A TODO-List Foxx-Application written for ArangoDB
@@ -36,16 +36,20 @@
   var FoxxApplication = require("org/arangodb/foxx").FoxxApplication,
     app = new FoxxApplication();
 
-  
-  app.requiresModels = {
-    todos: "todos"
-  };
+    // Register a repository with the name todos
+    // which uses a self implemented model and an repository
+    app.registerRepository(
+      "todos",
+      {
+        repository: "repositories/todos"
+      }
+    );
   
   // Define a GET event for the URL: prefix + /todos
   // This is used to retrieve the complete list of Todos.
   app.get('/todos', function (req, res) {
     // Return the complete content of the Todos-Collection
-    res.json(todos.list());
+    res.json(repositories.todos.list());
   }).nickname("todos")
   .summary("List of all Todos.")
   .notes("This function simply returns the list of all todos"); 
@@ -53,10 +57,11 @@
   // Define a POST event for the URL: prefix + /todos
   // This is used to create a new Todo.
   app.post('/todos', function (req, res) {
-    var content = JSON.parse(req.requestBody);
+    var content = JSON.parse(req.requestBody),
+      todo = new repositories.todos.modelPrototype(content);
     // Trigger the save event of the model with
     // the given Request Body and return the result.
-    res.json(todos.save(content));
+    res.json(repositories.todos.save(todo));
   }).nickname("todos")
   .summary("Create a new Todo")
   .notes("Creates a new Todo-Item. The information has to be in the requestBody."); 
@@ -65,11 +70,12 @@
   // This is used to update an existing Todo.
   app.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
-      content = JSON.parse(req.requestBody);
+      content = JSON.parse(req.requestBody),
+      todo = new repositories.todos.modelPrototype(content);
     // Trigger the update event of the model with
     // the given Request Body and id.
     // Then return the result.
-    res.json(todos.update(id, content));
+    res.json(repositories.todos.update(id, todo));
   }).nickname("todos")
   .summary("Update a Todo")
   .notes("Changes a Todo-Item. The information has to be in the requestBody."); 
@@ -81,7 +87,7 @@
     var id = req.params("id");
     // Trigger the remove event in the collection with
     // the given id and return the result.
-    res.json(todos.destroy(id));
+    res.json(repositories.todos.destroy(id));
   }).nickname("todos")
   .pathParam("id", {
     description: "The id of the Todo-Item",

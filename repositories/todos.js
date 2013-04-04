@@ -1,9 +1,10 @@
 /*jslint indent: 2, nomen: true, maxlen: 100, white: true, plusplus: true, unparam: true */
+/*global require, exports*/
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A TODO-List Foxx-Application written for ArangoDB
 ///
-/// @file
+/// @file This Document represents the repository communicating with ArangoDB
 ///
 /// DISCLAIMER
 ///
@@ -30,5 +31,29 @@
 (function () {
   "use strict";
   
-  // Right now unused as feature is not yet implemented
+  var _ = require("underscore"),
+    Foxx = require("org/arangodb/foxx"),
+    Ayeaye_Repository = Foxx.Repository.extend({
+      // Define the save functionality
+      save: function (content) {
+        this.collection.save(content.toJSON());
+      },
+      // Define the functionality to remove one object from the collection
+      destroy: function (id) {
+        this.collection.remove(id);
+      },
+      // Define the functionality to display all elements in the collection
+      list: function () {
+        var self = this;
+        return _.map(this.collection.toArray(), function(o) {
+          return new self.modelPrototype(o);
+        });
+      },
+      // Define the functionality to replace one document.
+      update: function (id, content) {
+        this.collection.replace(id, content);
+      }
+    });
+  exports.repository = Ayeaye_Repository;
+  
 }());
