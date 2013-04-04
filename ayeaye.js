@@ -33,7 +33,7 @@
   "use strict";
 
   // Initialise a new FoxxApplication called app under the urlPrefix: "ayeaye".
-  var FoxxApplication = require("org/arangodb/foxx").FoxxApplication,
+  var FoxxApplication = require("org/arangodb/foxx").Application,
     app = new FoxxApplication();
 
     // Register a repository with the name todos
