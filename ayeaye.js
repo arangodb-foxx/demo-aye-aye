@@ -36,14 +36,14 @@
   var FoxxApplication = require("org/arangodb/foxx").Application,
     app = new FoxxApplication();
 
-    // Register a repository with the name todos
-    // which uses a self implemented model and an repository
-    app.registerRepository(
-      "todos",
-      {
-        repository: "repositories/todos"
-      }
-    );
+  // Register a repository with the name todos
+  // which uses a self implemented model and an repository
+  app.registerRepository(
+    "todos",
+    {
+      repository: "repositories/todos"
+    }
+  );
   
   // Define a GET event for the URL: prefix + /todos
   // This is used to retrieve the complete list of Todos.

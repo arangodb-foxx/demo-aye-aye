@@ -2,7 +2,7 @@
   "name": "aye_aye",
   "version": "1.0.4",
   "description": "...",
-  "thumbnail": "...",
+  "thumbnail": "images/todomvc.png",
 
   "apps": {
     "/ayeaye": "ayeaye.js"
