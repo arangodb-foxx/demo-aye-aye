@@ -1,7 +1,7 @@
 {
   "name": "aye_aye",
   "version": "1.0.4",
-  "description": "...",
+  "description": "A ToDo-List Application.",
   "thumbnail": "images/todomvc.png",
 
   "apps": {
