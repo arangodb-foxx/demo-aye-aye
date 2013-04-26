@@ -36,11 +36,11 @@
   var arangodb = require("org/arangodb");
   var db = arangodb.db;
 
-  var todos = collectionName("todos");
+  var todos = app.collectionName("todos");
 
 
   if (db._collection(todos) === null) {
-    db._create(collectionName("todos"));
+    db._create(app.collectionName("todos"));
   }
   else {
     console.warn("collection '%s' already exists. Leaving it untouched.", todos);

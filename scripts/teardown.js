@@ -36,7 +36,7 @@
   var arangodb = require("org/arangodb");
   var db = arangodb.db;
 
-  var todos = appCollection("todos");
+  var todos = app.collectionName("todos");
 
   todos.drop();
 }());
