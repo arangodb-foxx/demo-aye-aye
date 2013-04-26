@@ -37,6 +37,10 @@
   var db = arangodb.db;
 
   var todos = app.collectionName("todos");
+  var collection = db._collection(todos);
 
-  todos.drop();
+  if (todos !== null) {
+    todos.drop();
+  }
+
 }());
