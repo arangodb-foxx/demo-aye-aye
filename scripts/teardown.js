@@ -39,8 +39,8 @@
   var todos = app.collectionName("todos");
   var collection = db._collection(todos);
 
-  if (todos !== null) {
-    todos.drop();
+  if (collection !== null) {
+    collection.drop();
   }
 
 }());
