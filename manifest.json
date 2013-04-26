@@ -41,5 +41,7 @@
 
   "files": {
     "/components" : "images"
-  }
+  },
+  
+  "lib": "."
 }
