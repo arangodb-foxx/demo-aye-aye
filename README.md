@@ -63,12 +63,12 @@ After [installing ArangoDB](http://www.arangodb.org/download), start your server
 
 Then start your Arango shell (`$ ./bin/arango`) and run the following commands:
 
-    arangosh> aal = require('org/arangodb/aal')
-    arangosh> aal.installDevApp('aye_aye', '/todo')
+    arangosh> aal = require('org/arangodb/aal');
+    arangosh> aal.installDevApp('aye_aye', '/todo');
 
 In this case, aye_aye gets mounted to '/todo' as main directory (but you can of cause adjust the path to your liking). Point your browser to `http://localhost:8529/todo/` to run the application.
 
 
 ## License
 
-This code is distributed under the [MIT license](http://opensource.org/licenses/MIT).
+This code is distributed under the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
