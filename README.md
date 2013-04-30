@@ -1,48 +1,35 @@
-aye_aye
-=======
+# aye_aye
+### A [TodoMVC](http://todomvc.com/) Foxx application written for ArangoDB.
 
-This is a TODO-MVC Foxx-Application written for ArangoDB.
-One objective of Foxx-Apps implemented in [ArangoDB](https://github.com/triAGENS/ArangoDB) is to create simple REST-Interfaces easily.
-In addition an asset pipeline is given that can easily deliver single page applications (f.e. using [backbone.js]{http://www.backbonejs.org}).
-So a Foxx-App can for instance be used to provide a basic application logic and a persistent data-storage in the ArangoDB.
-And this exactly what the aye_aye does.
-It consists of two major parts the Frontend and the Backend.
+The goal of Foxx apps implemented in [ArangoDB](https://github.com/triAGENS/ArangoDB) is to easily create simple REST interfaces. The included asset pipeline allows it to deliver complete single page applications (e.g. using [Backbone.js](http://www.backbonejs.org)) without a separate backend layer written in an arbitrary web framework. A Foxx app can be used to provide a basic application logic and a persistent data-storage in ArangoDB.
+
+aye_aye is an introducing example for this. It consists of a simple frontend and backend component.
 
 
-# Frontend
+## Frontend
 
-The backbone-frontend is taken from [addyosmani/todomvc](https://github.com/addyosmani/todomvc/tree/gh-pages/architecture-examples/backbone/).
-All credits to the authors.
-The objective of the frontend is to show how the MVC pattern is applied in backbone.
+The backbone frontend is based on [TodoMVC's Backbone.js example](https://github.com/addyosmani/todomvc/tree/gh-pages/architecture-examples/backbone/). (All credits to the authors.) It shows how the MV* pattern is applied in Backbone.js.
 
-However the original frontend used backbone-local-storage in order to persist the data.
-This local-storage has been replaced to use the REST-Interface defined in the aye_aye-foxx.
-The required modifications for this goal were quite trivial:
-Add an `url` function to all models and collections and remove the backbone-local-storage.
+The original persistance layer (backbone-local-storage) has been replaced to use the REST-Interface defined in the aye_aye-foxx. This was easily archived by adding an `url` function to all models and collections and removing the backbone-local-storage.
 
 
-# Backend
+## Backend
 
-The backend is a Foxx-Application written for [ArangoDB](https://github.com/triAGENS/ArangoDB).
-It consists of five parts:
+The backend is a Foxx application written for [ArangoDB](https://github.com/triAGENS/ArangoDB). It consists of five parts:
 
-## Manifest
+### Manifest
 
+The [manifest](manifest.json) is a general description of the Foxx application, including name and version. Also it defines the location of all files, including the assets to build the frontend.
 
-The manifest gives general description of the Foxx: Name and Version.
-Also it defines the positions of all files, including the assets to build the frontend.
+### Setup
 
-## Setup
+This [script](scripts/setup.js) is executed whenever the aye_aye is mounted to a path. It creates the collection for our ToDos.
 
-This script is executed whenever the aye_aye is mounted to a path.
-It creates the collection for our ToDos.
+### Teardown
 
-## Teardown
+This [script](scripts/teardown.js) is executed whenever a the aye_aye is uninstalled from a path. It drops the collection of ToDos.
 
-This script is executed whenever a the aye_aye is uninstalled from a path.
-It drops the collection of ToDos.
-
-## Models
+### Models
 
 Define the models that are executed within the Arango.
 The `todos` model offers 4 functions:
@@ -52,17 +39,36 @@ The `todos` model offers 4 functions:
 * list: Give a list of all Todos.
 * update: Overwrite the given Todo.
 
-## Libs
+### Libs
 
 Further libraries, but this feature is not used in the aye_aye.
 
-## The App
+### The App
 
 The `ayeaye.js` defines the REST interface.
 At first it requires the `todo`-model and creates a new Foxx.
 Then it defines the offered REST functions:
 
-* /todo GET: Invokes todos.list
-* /todo POST: Invokes todos.save
-* /todo/:id PUT: Invokes todos.update
-* /todo/:id DELETE: Invokes todo.destroy
+* `/todo` GET: Invokes todos.list
+* `/todo` POST: Invokes todos.save
+* `/todo/:id` PUT: Invokes todos.update
+* `/todo/:id` DELETE: Invokes todo.destroy
+
+
+## Installation
+
+After [installing ArangoDB](http://www.arangodb.org/download), start your server and point it to the location of the cloned repository:
+
+    $ ./bin/arangod --javascript.dev-app-path /path/to/aye_aye /path/to/your/arango_db
+
+Then start your Arango shell (`$ ./bin/arango`) and run the following commands:
+
+    arangosh> aal = require('org/arangodb/aal')
+    arangosh> aal.installDevApp('aye_aye', '/todo')
+
+In this case, aye_aye gets mounted to '/todo' as main directory (but you can of cause adjust the path to your liking). Point your browser to `http://localhost:8529/todo/` to run the application.
+
+
+## License
+
+This code is distributed under the [MIT license](http://opensource.org/licenses/MIT).
