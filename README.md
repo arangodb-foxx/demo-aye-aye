@@ -59,9 +59,9 @@ Then it defines the offered REST functions:
 
 After [installing ArangoDB](http://www.arangodb.org/download), start your server and point it to the location of the cloned repository:
 
-    $ ./bin/arangod --javascript.dev-app-path /path/to/aye_aye /path/to/your/arango_db
+    $ arangod --javascript.dev-app-path /path/to/aye_aye /path/to/your/arango_db
 
-Then start your Arango shell (`$ ./bin/arango`) and run the following commands:
+Then start your Arango shell (`$ arangosh`) and run the following commands:
 
     arangosh> aal = require('org/arangodb/aal');
     arangosh> aal.installDevApp('aye_aye', '/todo');
