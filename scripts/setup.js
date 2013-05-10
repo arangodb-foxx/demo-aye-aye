@@ -49,7 +49,7 @@
 
 
   if (db._collection(todos) === null) {
-    db._create(app.collectionName("todos"));
+    db._create(todos);
   }
   else {
     console.warn("collection '%s' already exists. Leaving it untouched.", todos);
