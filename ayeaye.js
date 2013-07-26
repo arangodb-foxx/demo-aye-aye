@@ -35,11 +35,11 @@
 
   // Initialise a new FoxxApplication called app under the urlPrefix: "ayeaye".
   var FoxxApplication = require("org/arangodb/foxx").Application,
-    app = new FoxxApplication();
+    app = new FoxxApplication(applicationContext);
 
   // Register a repository with the name todos
   // which uses a self implemented model and an repository
-  app.registerRepository(
+  var todos = app.createRepository(
     "todos",
     {
       repository: "repositories/todos"
@@ -50,8 +50,8 @@
   // This is used to retrieve the complete list of Todos.
   app.get('/todos', function (req, res) {
     // Return the complete content of the Todos-Collection
-    res.json(repositories.todos.list());
-  }).nickname("todos")
+    res.json(todos.list());
+  })
   .summary("List of all Todos.")
   .notes("This function simply returns the list of all todos"); 
 
@@ -59,11 +59,11 @@
   // This is used to create a new Todo.
   app.post('/todos', function (req, res) {
     var content = JSON.parse(req.requestBody),
-      todo = new repositories.todos.modelPrototype(content);
+      todo = new todos.modelPrototype(content);
     // Trigger the save event of the model with
     // the given Request Body and return the result.
-    res.json(repositories.todos.save(todo));
-  }).nickname("todos")
+    res.json(todos.save(todo));
+  })
   .summary("Create a new Todo")
   .notes("Creates a new Todo-Item. The information has to be in the requestBody."); 
 
@@ -72,12 +72,12 @@
   app.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
       content = JSON.parse(req.requestBody),
-      todo = new repositories.todos.modelPrototype(content);
+      todo = new todos.modelPrototype(content);
     // Trigger the update event of the model with
     // the given Request Body and id.
     // Then return the result.
-    res.json(repositories.todos.update(id, todo));
-  }).nickname("todos")
+    res.json(todos.update(id, todo));
+  })
   .summary("Update a Todo")
   .notes("Changes a Todo-Item. The information has to be in the requestBody."); 
   
@@ -88,8 +88,8 @@
     var id = req.params("id");
     // Trigger the remove event in the collection with
     // the given id and return the result.
-    res.json(repositories.todos.destroy(id));
-  }).nickname("todos")
+    res.json(todos.destroy(id));
+  })
   .pathParam("id", {
     description: "The id of the Todo-Item",
     dataType: "string",
@@ -98,9 +98,4 @@
   })
   .summary("Removes a Todo")
   .notes("Removes a Todo-Item."); 
-  
-
-  // Start the todo-list application.
-  // Remember to give the applicationContext.
-  app.start(applicationContext);
 }());
