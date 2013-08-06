@@ -38,7 +38,7 @@
   var arangodb = require("org/arangodb");
   var db = arangodb.db;
 
-  var todos = app.collectionName("todos");
+  var todos = applicationContext.collectionName("todos");
 
 
   if (db._collection(todos) === null) {
