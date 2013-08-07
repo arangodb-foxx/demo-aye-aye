@@ -35,7 +35,8 @@
 
   // Initialise a new FoxxApplication called app under the urlPrefix: "ayeaye".
   var FoxxApplication = require("org/arangodb/foxx").Application,
-    app = new FoxxApplication(applicationContext);
+    app = new FoxxApplication(applicationContext),
+    ArangoError = require("org/arangodb").ArangoError;
 
   // Register a repository with the name todos
   // which uses a self implemented model and an repository
@@ -46,7 +47,7 @@
       repository: "repositories/todos"
     }
   );
-  
+
   /** Lists of all Todos
    *
    * This function simply returns the list of all todos.
@@ -68,11 +69,8 @@
    */
 
   app.post('/todos', function (req, res) {
-    var content = JSON.parse(req.requestBody),
-      todo = new todos.modelPrototype(content);
-    // Trigger the save event of the model with
-    // the given Request Body and return the result.
-    res.json(todos.save(todo));
+    var content = JSON.parse(req.requestBody);
+    res.json(todos.create(content));
   });
 
   /** Updates a Todo
@@ -85,12 +83,8 @@
 
   app.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
-      content = JSON.parse(req.requestBody),
-      todo = new todos.modelPrototype(content);
-    // Trigger the update event of the model with
-    // the given Request Body and id.
-    // Then return the result.
-    res.json(todos.update(id, todo));
+      content = JSON.parse(req.requestBody);
+    res.json(todos.update(id, content));
   })
   .pathParam("id", {
     description: "The id of the Todo-Item",
@@ -102,20 +96,18 @@
   /** Removes a Todo
    *
    * Removes a Todo-Item.
-   * 
+   *
    * Define a DELETE event for the URL: prefix + /todos/:todoid.
    */
 
-  app['delete']("/todos/:id", function (req, res) {
+  app.del("/todos/:id", function (req, res) {
     var id = req.params("id");
-    // Trigger the remove event in the collection with
-    // the given id and return the result.
     res.json(todos.destroy(id));
   })
   .pathParam("id", {
-    description: "The id of the Todo-Item",
+    description: "The ID of the Todo-Item",
     dataType: "string",
     required: true,
     multiple: false
-  });
+  }).errorResponse(ArangoError, 404, "The document could not be found");
 }());

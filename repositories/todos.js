@@ -32,30 +32,36 @@
 
 (function () {
   "use strict";
-  
+
   var _ = require("underscore"),
     Foxx = require("org/arangodb/foxx"),
-    Ayeaye_Repository = Foxx.Repository.extend({
-      // Define the save functionality
-      save: function (content) {
-        return this.collection.save(content.forDB());
-      },
-      // Define the functionality to remove one object from the collection
-      destroy: function (id) {
-        this.collection.remove(id);
-      },
-      // Define the functionality to display all elements in the collection
-      list: function () {
-        var self = this;
-        return _.map(this.collection.toArray(), function(o) {
-          return new self.modelPrototype(o).forClient();
-        });
-      },
-      // Define the functionality to replace one document.
-      update: function (id, content) {
-        this.collection.replace(id, content.forDB());
-      }
-    });
+    Ayeaye_Repository;
+
+  Ayeaye_Repository = Foxx.Repository.extend({
+    create: function (raw) {
+      var todo = new this.modelPrototype(raw);
+      return this.collection.save(todo.forDB());
+    },
+
+    // Define the functionality to remove one object from the collection
+    destroy: function (id) {
+      return this.collection.remove(id);
+    },
+
+    // Define the functionality to display all elements in the collection
+    list: function () {
+      var self = this;
+      return _.map(this.collection.toArray(), function(o) {
+        return new self.modelPrototype(o).forClient();
+      });
+    },
+
+    // Define the functionality to replace one document.
+    update: function (id, content) {
+      var todo = new this.modelPrototype(content);
+      this.collection.replace(id, todo.forDB());
+    }
+  });
+
   exports.Repository = Ayeaye_Repository;
-  
 }());
