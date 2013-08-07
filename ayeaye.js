@@ -39,6 +39,7 @@
 
   // Register a repository with the name todos
   // which uses a self implemented model and an repository
+
   var todos = app.createRepository(
     "todos",
     {
@@ -46,29 +47,42 @@
     }
   );
   
-  // Define a GET event for the URL: prefix + /todos
-  // This is used to retrieve the complete list of Todos.
+  /** Lists of all Todos
+   *
+   * This function simply returns the list of all todos.
+   *
+   * Defines a GET event for the URL: prefix + /todos.
+   */
+
   app.get('/todos', function (req, res) {
     // Return the complete content of the Todos-Collection
     res.json(todos.list());
-  })
-  .summary("List of all Todos.")
-  .notes("This function simply returns the list of all todos"); 
+  });
 
-  // Define a POST event for the URL: prefix + /todos
-  // This is used to create a new Todo.
+  /** Creates a new Todo
+   *
+   * Creates a new Todo-Item. The information has to be in the
+   * requestBody.
+   *
+   * Define a POST event for the URL: prefix + /todos.
+   */
+
   app.post('/todos', function (req, res) {
     var content = JSON.parse(req.requestBody),
       todo = new todos.modelPrototype(content);
     // Trigger the save event of the model with
     // the given Request Body and return the result.
     res.json(todos.save(todo));
-  })
-  .summary("Create a new Todo")
-  .notes("Creates a new Todo-Item. The information has to be in the requestBody."); 
+  });
 
-  // Define a PUT event for the URL: prefix + /todos/:todoid
-  // This is used to update an existing Todo.
+  /** Updates a Todo
+   *
+   * Changes a Todo-Item. The information has to be in the
+   * requestBody.
+   *
+   * Define a PUT event for the URL: prefix + /todos/:todoid.
+   */
+
   app.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
       content = JSON.parse(req.requestBody),
@@ -78,12 +92,20 @@
     // Then return the result.
     res.json(todos.update(id, todo));
   })
-  .summary("Update a Todo")
-  .notes("Changes a Todo-Item. The information has to be in the requestBody."); 
-  
+  .pathParam("id", {
+    description: "The id of the Todo-Item",
+    dataType: "string",
+    required: true,
+    multiple: false
+  });
 
-  // Define a DELETE event for the URL: prefix + /todos/:todoid
-  // This is used to remove an existing Todo.
+  /** Removes a Todo
+   *
+   * Removes a Todo-Item.
+   * 
+   * Define a DELETE event for the URL: prefix + /todos/:todoid.
+   */
+
   app['delete']("/todos/:id", function (req, res) {
     var id = req.params("id");
     // Trigger the remove event in the collection with
@@ -95,7 +117,5 @@
     dataType: "string",
     required: true,
     multiple: false
-  })
-  .summary("Removes a Todo")
-  .notes("Removes a Todo-Item."); 
+  });
 }());

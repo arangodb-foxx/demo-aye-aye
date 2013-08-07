@@ -48,7 +48,7 @@
       list: function () {
         var self = this;
         return _.map(this.collection.toArray(), function(o) {
-          return new self.modelPrototype(o);
+          return new self.modelPrototype(o).forClient();
         });
       },
       // Define the functionality to replace one document.
