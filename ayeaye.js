@@ -36,17 +36,14 @@
   // Initialise a new FoxxApplication called app under the urlPrefix: "ayeaye".
   var FoxxApplication = require("org/arangodb/foxx").Application,
     app = new FoxxApplication(applicationContext),
-    ArangoError = require("org/arangodb").ArangoError;
+    ArangoError = require("org/arangodb").ArangoError,
+    TodosRepository = require("./repositories/todos").Repository,
+    Todo = require("./models/todo").Model,
+    todos;
 
-  // Register a repository with the name todos
-  // which uses a self implemented model and an repository
-
-  var todos = app.createRepository(
-    "todos",
-    {
-      repository: "repositories/todos"
-    }
-  );
+  todos = new TodosRepository(app.collection("todos"), {
+    model: Todo
+  });
 
   /** Lists of all Todos
    *
