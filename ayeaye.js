@@ -69,7 +69,7 @@
    */
 
   app.post('/todos', function (req, res) {
-    var content = JSON.parse(req.requestBody);
+    var content = req.body();
     res.json(todos.create(content));
   });
 
@@ -83,7 +83,7 @@
 
   app.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
-      content = JSON.parse(req.requestBody);
+      content = req.body();
     res.json(todos.update(id, content));
   })
   .pathParam("id", {
