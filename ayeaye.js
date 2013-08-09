@@ -81,9 +81,7 @@
     res.json(todos.update(id, content));
   }).pathParam("id", {
     description: "The id of the Todo-Item",
-    dataType: "string",
-    required: true,
-    multiple: false
+    type: "string"
   });
 
   /** Removes a Todo
@@ -98,8 +96,6 @@
     res.json(todos.destroy(id));
   }).pathParam("id", {
     description: "The ID of the Todo-Item",
-    dataType: "string",
-    required: true,
-    multiple: false
+    type: "string"
   }).errorResponse(ArangoError, 404, "The document could not be found");
 }());
