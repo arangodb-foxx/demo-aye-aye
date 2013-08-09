@@ -40,11 +40,9 @@
 
   var todos = applicationContext.collectionName("todos");
 
-
   if (db._collection(todos) === null) {
     db._create(todos);
-  }
-  else {
+  } else if (applicationContext.isProduction) {
     console.warn("collection '%s' already exists. Leaving it untouched.", todos);
   }
 }());
