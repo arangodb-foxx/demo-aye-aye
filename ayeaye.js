@@ -1,6 +1,5 @@
-/*jslint indent: 2, nomen: true, maxlen: 100, white: true, plusplus: true, unparam: true */
-/*global todos*/
-/*global require, applicationContext, repositories*/
+/*jslint indent: 2, nomen: true, maxlen: 100 */
+/*global require, applicationContext */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A TODO-List Foxx-Application written for ArangoDB
@@ -29,19 +28,18 @@
 /// @author Copyright 2011-2013, triAGENS GmbH, Cologne, Germany
 ////////////////////////////////////////////////////////////////////////////////
 
-
-(function() {
+(function () {
   "use strict";
-
-  // Initialise a new FoxxApplication called app under the urlPrefix: "ayeaye".
-  var FoxxApplication = require("org/arangodb/foxx").Application,
-    app = new FoxxApplication(applicationContext),
+  var Foxx = require("org/arangodb/foxx"),
     ArangoError = require("org/arangodb").ArangoError,
-    TodosRepository = require("./repositories/todos").Repository,
+    Todos = require("./repositories/todos").Repository,
     Todo = require("./models/todo").Model,
+    app,
     todos;
 
-  todos = new TodosRepository(app.collection("todos"), {
+  app = new Foxx.Application(applicationContext);
+
+  todos = new Todos(app.collection("todos"), {
     model: Todo
   });
 
@@ -53,7 +51,6 @@
    */
 
   app.get('/todos', function (req, res) {
-    // Return the complete content of the Todos-Collection
     res.json(todos.list());
   });
 
@@ -82,8 +79,7 @@
     var id = req.params("id"),
       content = req.body();
     res.json(todos.update(id, content));
-  })
-  .pathParam("id", {
+  }).pathParam("id", {
     description: "The id of the Todo-Item",
     dataType: "string",
     required: true,
@@ -100,8 +96,7 @@
   app.del("/todos/:id", function (req, res) {
     var id = req.params("id");
     res.json(todos.destroy(id));
-  })
-  .pathParam("id", {
+  }).pathParam("id", {
     description: "The ID of the Todo-Item",
     dataType: "string",
     required: true,
