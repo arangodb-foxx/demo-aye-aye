@@ -1,4 +1,4 @@
-/*jslint indent: 2, nomen: true, maxlen: 100, white: true, plusplus: true, unparam: true */
+/*jslint indent: 2, nomen: true, maxlen: 100 */
 /*global require, exports*/
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,40 +28,39 @@
 /// @author Copyright 2011-2013, triAGENS GmbH, Cologne, Germany
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 (function () {
   "use strict";
 
   var _ = require("underscore"),
     Foxx = require("org/arangodb/foxx"),
-    Ayeaye_Repository;
+    Todos;
 
-  Ayeaye_Repository = Foxx.Repository.extend({
-    create: function (raw) {
-      var todo = new this.modelPrototype(raw);
+  Todos = Foxx.Repository.extend({
+    // Create a new Todo in the collection
+    create: function (rawTodo) {
+      var todo = new this.modelPrototype(rawTodo);
       return this.collection.save(todo.forDB());
     },
 
-    // Define the functionality to remove one object from the collection
+    // Remove one object from the collection
     destroy: function (id) {
       return this.collection.remove(id);
     },
 
-    // Define the functionality to display all elements in the collection
+    // Display all elements in the collection
     list: function () {
-      var self = this;
-      return _.map(this.collection.toArray(), function(o) {
-        return new self.modelPrototype(o).forClient();
-      });
+      return _.map(this.collection.toArray(), function (rawTodo) {
+        var todo = new this.modelPrototype(rawTodo);
+        return todo.forClient();
+      }, this);
     },
 
-    // Define the functionality to replace one document.
+    // Replace one document
     update: function (id, content) {
       var todo = new this.modelPrototype(content);
-      this.collection.replace(id, todo.forDB());
+      return this.collection.replace(id, todo.forDB());
     }
   });
 
-  exports.Repository = Ayeaye_Repository;
+  exports.Repository = Todos;
 }());
