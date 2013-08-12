@@ -33,18 +33,13 @@
 
 (function() {
   "use strict";
-
-  var console = require("console");
-  var arangodb = require("org/arangodb");
-  var db = arangodb.db;
-
-  var todos = applicationContext.collectionName("todos");
-
+  var console = require("console"),
+    db = require("org/arangodb").db,
+    todos = applicationContext.collectionName("todos");
 
   if (db._collection(todos) === null) {
     db._create(todos);
-  }
-  else {
+  } else if (applicationContext.isProduction) {
     console.warn("collection '%s' already exists. Leaving it untouched.", todos);
   }
 }());

@@ -21,15 +21,15 @@
 
     "app.js": {
       "files": [
-	      "assets/components/js/underscore/**",
-	      "assets/components/js/jquery/**",
-	      "assets/components/js/backbone/**",
-	      "assets/components/js/todomvc-common/**",
-	      "assets/js/models/**",
-	      "assets/js/collections/**",
-	      "assets/js/views/**",
-	      "assets/js/routers/**",
-	      "assets/js/app.js"
+        "assets/components/js/underscore/**",
+        "assets/components/js/jquery/**",
+        "assets/components/js/backbone/**",
+        "assets/components/js/todomvc-common/**",
+        "assets/js/models/**",
+        "assets/js/collections/**",
+        "assets/js/views/**",
+        "assets/js/routers/**",
+        "assets/js/app.js"
       ]
     },
 
@@ -43,6 +43,6 @@
   "files": {
     "/components" : "images"
   },
-  
+
   "lib": "."
 }
