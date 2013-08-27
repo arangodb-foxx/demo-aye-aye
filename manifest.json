@@ -18,6 +18,11 @@
     "url": "https://github.com/mchacki/aye_aye.git"
   },
 
+  "keywords": [
+    "todo",
+    "demo"
+  ],
+
   "apps": {
     "/ayeaye": "ayeaye.js"
   },
