@@ -23,6 +23,10 @@
     "demo"
   ],
 
+  "engines": {
+    "arangodb": "1.4"
+  },
+
   "apps": {
     "/ayeaye": "ayeaye.js"
   },
