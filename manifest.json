@@ -4,6 +4,7 @@
   "description": "A ToDo-List Application.",
   "thumbnail": "images/todomvc.png",
   "author": "Michael Hackstein",
+  "license": "Apache 2 License",
 
   "apps": {
     "/ayeaye": "ayeaye.js"
