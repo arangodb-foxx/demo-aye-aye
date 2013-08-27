@@ -13,6 +13,11 @@
     }
   ],
 
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mchacki/aye_aye.git"
+  },
+
   "apps": {
     "/ayeaye": "ayeaye.js"
   },
