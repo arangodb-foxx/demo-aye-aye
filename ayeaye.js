@@ -34,12 +34,12 @@
     ArangoError = require("org/arangodb").ArangoError,
     Todos = require("./repositories/todos").Repository,
     Todo = require("./models/todo").Model,
-    app,
+    controller,
     todos;
 
-  app = new Foxx.Application(applicationContext);
+  controller = new Foxx.Controller(applicationContext);
 
-  todos = new Todos(app.collection("todos"), {
+  todos = new Todos(controller.collection("todos"), {
     model: Todo
   });
 
@@ -50,7 +50,7 @@
    * Defines a GET event for the URL: prefix + /todos.
    */
 
-  app.get('/todos', function (req, res) {
+  controller.get('/todos', function (req, res) {
     res.json(todos.list());
   });
 
@@ -62,9 +62,21 @@
    * Define a POST event for the URL: prefix + /todos.
    */
 
-  app.post('/todos', function (req, res) {
+  controller.post('/todos', function (req, res) {
     var content = req.body();
     res.json(todos.create(content));
+  // }).bodyParam("title", {
+  //   description: "The title of the item",
+  //   type: "string",
+  //   required: true
+  // }).bodyParam("order", {
+  //   description: "The position in the list of todos",
+  //   type: "int",
+  //   required: true
+  // }).bodyParam("completed", {
+  //   description: "Was the item completed yet?",
+  //   type: "boolean",
+  //   required: true
   });
 
   /** Updates a Todo
@@ -75,7 +87,7 @@
    * Define a PUT event for the URL: prefix + /todos/:todoid.
    */
 
-  app.put("/todos/:id", function (req, res) {
+  controller.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
       content = req.body();
     res.json(todos.update(id, content));
@@ -91,7 +103,7 @@
    * Define a DELETE event for the URL: prefix + /todos/:todoid.
    */
 
-  app.del("/todos/:id", function (req, res) {
+  controller.del("/todos/:id", function (req, res) {
     var id = req.params("id");
     res.json(todos.destroy(id));
   }).pathParam("id", {
