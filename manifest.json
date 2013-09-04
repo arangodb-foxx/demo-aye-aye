@@ -27,7 +27,7 @@
     "arangodb": "1.4"
   },
 
-  "apps": {
+  "controllers": {
     "/ayeaye": "ayeaye.js"
   },
 
