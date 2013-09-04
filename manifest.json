@@ -4,8 +4,30 @@
   "description": "A ToDo-List Application.",
   "thumbnail": "images/todomvc.png",
   "author": "Michael Hackstein",
+  "license": "Apache 2 License",
 
-  "apps": {
+  "contributors": [
+    {
+      "name": "Lucas Dohmen",
+      "email": "lucas@arangodb.org"
+    }
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mchacki/aye_aye.git"
+  },
+
+  "keywords": [
+    "todo",
+    "demo"
+  ],
+
+  "engines": {
+    "arangodb": "1.4"
+  },
+
+  "controllers": {
     "/ayeaye": "ayeaye.js"
   },
 
