@@ -75,7 +75,7 @@
   controller.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
       todo = new Todo(req.body());
-    res.json(todos.replace(id, todo));
+    res.json(todos.replaceById(id, todo));
   }).pathParam("id", {
     description: "The id of the Todo-Item",
     type: "string"
@@ -88,7 +88,8 @@
 
   controller.del("/todos/:id", function (req, res) {
     var id = req.params("id");
-    res.json(todos.remove(id));
+    todos.removeById(id);
+    res.json({ success: true });
   }).pathParam("id", {
     description: "The ID of the Todo-Item",
     type: "string"
