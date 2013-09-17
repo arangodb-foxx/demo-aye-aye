@@ -37,27 +37,25 @@
 
   Todos = Foxx.Repository.extend({
     // Create a new Todo in the collection
-    create: function (rawTodo) {
-      var todo = new this.modelPrototype(rawTodo);
+    save: function (todo) {
       return this.collection.save(todo.forDB());
     },
 
     // Remove one object from the collection
-    destroy: function (id) {
+    remove: function (id) {
       return this.collection.remove(id);
     },
 
     // Display all elements in the collection
-    list: function () {
+    all: function () {
       return _.map(this.collection.toArray(), function (rawTodo) {
         var todo = new this.modelPrototype(rawTodo);
-        return todo.forClient();
+        return todo;
       }, this);
     },
 
     // Replace one document
-    update: function (id, content) {
-      var todo = new this.modelPrototype(content);
+    replace: function (id, todo) {
       return this.collection.replace(id, todo.forDB());
     }
   });

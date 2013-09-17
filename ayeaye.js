@@ -34,6 +34,7 @@
     ArangoError = require("org/arangodb").ArangoError,
     Todos = require("./repositories/todos").Repository,
     Todo = require("./models/todo").Model,
+    _ = require("underscore"),
     controller,
     todos;
 
@@ -46,51 +47,35 @@
   /** Lists of all Todos
    *
    * This function simply returns the list of all todos.
-   *
-   * Defines a GET event for the URL: prefix + /todos.
    */
 
   controller.get('/todos', function (req, res) {
-    res.json(todos.list());
+    res.json(_.map(todos.all(), function (todo) {
+      return todo.forClient();
+    }));
   });
 
   /** Creates a new Todo
    *
    * Creates a new Todo-Item. The information has to be in the
    * requestBody.
-   *
-   * Define a POST event for the URL: prefix + /todos.
    */
 
   controller.post('/todos', function (req, res) {
-    var content = req.body();
-    res.json(todos.create(content));
-  // }).bodyParam("title", {
-  //   description: "The title of the item",
-  //   type: "string",
-  //   required: true
-  // }).bodyParam("order", {
-  //   description: "The position in the list of todos",
-  //   type: "int",
-  //   required: true
-  // }).bodyParam("completed", {
-  //   description: "Was the item completed yet?",
-  //   type: "boolean",
-  //   required: true
+    var todo = new Todo(req.body());
+    res.json(todos.save(todo));
   });
 
   /** Updates a Todo
    *
    * Changes a Todo-Item. The information has to be in the
    * requestBody.
-   *
-   * Define a PUT event for the URL: prefix + /todos/:todoid.
    */
 
   controller.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
-      content = req.body();
-    res.json(todos.update(id, content));
+      todo = new Todo(req.body());
+    res.json(todos.replace(id, todo));
   }).pathParam("id", {
     description: "The id of the Todo-Item",
     type: "string"
@@ -99,13 +84,11 @@
   /** Removes a Todo
    *
    * Removes a Todo-Item.
-   *
-   * Define a DELETE event for the URL: prefix + /todos/:todoid.
    */
 
   controller.del("/todos/:id", function (req, res) {
     var id = req.params("id");
-    res.json(todos.destroy(id));
+    res.json(todos.remove(id));
   }).pathParam("id", {
     description: "The ID of the Todo-Item",
     type: "string"
