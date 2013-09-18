@@ -36,27 +36,12 @@
     Todos;
 
   Todos = Foxx.Repository.extend({
-    // Create a new Todo in the collection
-    save: function (todo) {
-      return this.collection.save(todo.forDB());
-    },
-
-    // Remove one object from the collection
-    remove: function (id) {
-      return this.collection.remove(id);
-    },
-
     // Display all elements in the collection
     all: function () {
       return _.map(this.collection.toArray(), function (rawTodo) {
         var todo = new this.modelPrototype(rawTodo);
         return todo;
       }, this);
-    },
-
-    // Replace one document
-    replace: function (id, todo) {
-      return this.collection.replace(id, todo.forDB());
     }
   });
 
