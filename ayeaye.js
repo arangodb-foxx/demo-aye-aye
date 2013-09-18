@@ -62,9 +62,9 @@
    */
 
   controller.post('/todos', function (req, res) {
-    var todo = new Todo(req.body());
+    var todo = req.params("todo");
     res.json(todos.save(todo));
-  });
+  }).bodyParam("todo", "The Todo you want to create", Todo);
 
   /** Updates a Todo
    *
@@ -74,12 +74,12 @@
 
   controller.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
-      todo = new Todo(req.body());
+      todo = req.params("todo");
     res.json(todos.replaceById(id, todo));
   }).pathParam("id", {
     description: "The id of the Todo-Item",
     type: "string"
-  });
+  }).bodyParam("todo", "The Todo you want your old one to be replaced with", Todo);
 
   /** Removes a Todo
    *

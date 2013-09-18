@@ -33,8 +33,15 @@
   var Foxx = require("org/arangodb/foxx"),
     Todo;
 
-  // Currently you could use the normal model, but for demo purposes
   Todo = Foxx.Model.extend({
+    // Instance Properties
+  }, {
+    // "Class" Properties
+    attributes: {
+      completed: "boolean",
+      order: "integer",
+      title: "string"
+    }
   });
 
   exports.Model = Todo;
