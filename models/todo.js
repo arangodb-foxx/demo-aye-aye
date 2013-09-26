@@ -1,4 +1,5 @@
-/*jslint indent: 2, nomen: true, maxlen: 100, white: true, plusplus: true, unparam: true */
+/*jslint indent: 2, nomen: true, maxlen: 100 */
+/*global require, exports */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A TODO-List Foxx-Application written for ArangoDB
@@ -27,10 +28,21 @@
 /// @author Copyright 2011-2013, triAGENS GmbH, Cologne, Germany
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 (function () {
   "use strict";
-  
-  // Right now unused as feature is not yet implemented
+  var Foxx = require("org/arangodb/foxx"),
+    Todo;
+
+  Todo = Foxx.Model.extend({
+    // Instance Properties
+  }, {
+    // "Class" Properties
+    attributes: {
+      completed: "boolean",
+      order: "integer",
+      title: "string"
+    }
+  });
+
+  exports.Model = Todo;
 }());

@@ -1,10 +1,33 @@
 {
   "name": "aye_aye",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "A ToDo-List Application.",
   "thumbnail": "images/todomvc.png",
+  "author": "Michael Hackstein",
+  "license": "Apache 2 License",
 
-  "apps": {
+  "contributors": [
+    {
+      "name": "Lucas Dohmen",
+      "email": "lucas@arangodb.org"
+    }
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mchacki/aye_aye.git"
+  },
+
+  "keywords": [
+    "todo",
+    "demo"
+  ],
+
+  "engines": {
+    "arangodb": "1.4"
+  },
+
+  "controllers": {
     "/ayeaye": "ayeaye.js"
   },
 
@@ -20,15 +43,15 @@
 
     "app.js": {
       "files": [
-	      "assets/components/js/underscore/**",
-	      "assets/components/js/jquery/**",
-	      "assets/components/js/backbone/**",
-	      "assets/components/js/todomvc-common/**",
-	      "assets/js/models/**",
-	      "assets/js/collections/**",
-	      "assets/js/views/**",
-	      "assets/js/routers/**",
-	      "assets/js/app.js"
+        "assets/components/js/underscore/**",
+        "assets/components/js/jquery/**",
+        "assets/components/js/backbone/**",
+        "assets/components/js/todomvc-common/**",
+        "assets/js/models/**",
+        "assets/js/collections/**",
+        "assets/js/views/**",
+        "assets/js/routers/**",
+        "assets/js/app.js"
       ]
     },
 
@@ -42,6 +65,6 @@
   "files": {
     "/components" : "images"
   },
-  
+
   "lib": "."
 }

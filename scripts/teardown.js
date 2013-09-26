@@ -29,20 +29,14 @@
 /// @author Copyright 2011-2013, triAGENS GmbH, Cologne, Germany
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 (function() {
   "use strict";
 
-  var console = require("console");
-  var arangodb = require("org/arangodb");
-  var db = arangodb.db;
-
-  var todos = applicationContext.collectionName("todos");
-  var collection = db._collection(todos);
+  var db = require("org/arangodb").db,
+    todos = applicationContext.collectionName("todos"),
+    collection = db._collection(todos);
 
   if (collection !== null) {
     collection.drop();
   }
-
 }());
