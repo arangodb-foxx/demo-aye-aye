@@ -1,16 +1,16 @@
-# aye_aye
+# aye-aye
 ### A [TodoMVC](http://todomvc.com/) Foxx application written for ArangoDB.
 
 The goal of Foxx apps implemented in [ArangoDB](https://github.com/triAGENS/ArangoDB) is to easily create simple REST interfaces. The included asset pipeline allows it to deliver complete single page applications (e.g. using [Backbone.js](http://www.backbonejs.org)) without a separate backend layer written in an arbitrary web framework. A Foxx app can be used to provide a basic application logic and a persistent data-storage in ArangoDB.
 
-aye_aye is an introducing example for this. It consists of a simple frontend and backend component.
+aye-aye is an introducing example for this. It consists of a simple frontend and backend component.
 
 
 ## Frontend
 
 The backbone frontend is based on [TodoMVC's Backbone.js example](https://github.com/addyosmani/todomvc/tree/gh-pages/architecture-examples/backbone/). (All credits to the authors.) It shows how the MV* pattern is applied in Backbone.js.
 
-The original persistance layer (backbone-local-storage) has been replaced to use the REST-Interface defined in the aye_aye-foxx. This was easily archived by adding an `url` function to all models and collections and removing the backbone-local-storage.
+The original persistance layer (backbone-local-storage) has been replaced to use the REST-Interface defined in the aye-aye-foxx. This was easily archived by adding an `url` function to all models and collections and removing the backbone-local-storage.
 
 
 ## Backend
@@ -23,11 +23,11 @@ The [manifest](manifest.json) is a general description of the Foxx application, 
 
 ### Setup
 
-This [script](scripts/setup.js) is executed whenever the aye_aye is mounted to a path. It creates the collection for our ToDos.
+This [script](scripts/setup.js) is executed whenever the aye-aye is mounted to a path. It creates the collection for our ToDos.
 
 ### Teardown
 
-This [script](scripts/teardown.js) is executed whenever a the aye_aye is uninstalled from a path. It drops the collection of ToDos.
+This [script](scripts/teardown.js) is executed whenever a the aye-aye is uninstalled from a path. It drops the collection of ToDos.
 
 ### Models
 
@@ -41,7 +41,7 @@ The `todos` model offers 4 functions:
 
 ### Libs
 
-Further libraries, but this feature is not used in the aye_aye.
+Further libraries, but this feature is not used in the aye-aye.
 
 ### The App
 
@@ -59,14 +59,14 @@ Then it defines the offered REST functions:
 
 After [installing ArangoDB](http://www.arangodb.org/download), start your server and point it to the location of the cloned repository:
 
-    $ arangod --javascript.dev-app-path /path/to/aye_aye /path/to/your/arango_db
+    $ arangod --javascript.dev-app-path /path/to/aye-aye /path/to/your/arango_db
 
 Then start your Arango shell (`$ arangosh`) and run the following commands:
 
     arangosh> aal = require('org/arangodb/aal');
-    arangosh> aal.installDevApp('aye_aye', '/todo');
+    arangosh> aal.installDevApp('aye-aye', '/todo');
 
-In this case, aye_aye gets mounted to '/todo' as main directory (but you can of cause adjust the path to your liking). Point your browser to `http://localhost:8529/todo/` to run the application.
+In this case, aye-aye gets mounted to '/todo' as main directory (but you can of cause adjust the path to your liking). Point your browser to `http://localhost:8529/todo/` to run the application.
 
 
 ## License
