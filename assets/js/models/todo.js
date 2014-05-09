@@ -22,7 +22,7 @@ var app = app || {};
       if (this.get("_key") !== undefined) {
         // If the Todo-Event is existing it has a _key attribute,
         // so we can use the id route.
-        return "ayeaye/todos/" + this.get("_key");
+        return "ayeaye/todos/" + encodeURIComponent(this.get("_key"));
       }
       // If we create a new Todo-Event we send the POST without the id.
       return "ayeaye/todos";
@@ -33,7 +33,7 @@ var app = app || {};
     // The ArangoDB creates a unique _id for ids
     // not an id as expected by backbone.
     isNew: function() {
-      return this.get("_id") === undefined || this.get("_id") === null;
+      return (this.get("_key") === undefined);
     },
 
     // Toggle the `completed` state of this todo item.

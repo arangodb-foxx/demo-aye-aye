@@ -38,6 +38,7 @@
   }, {
     // "Class" Properties
     attributes: {
+      _key: "string",
       completed: "boolean",
       order: "integer",
       title: "string"
