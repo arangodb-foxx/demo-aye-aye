@@ -63,7 +63,7 @@
 
   controller.post('/todos', function (req, res) {
     var todo = req.params("todo");
-    res.json(todos.save(todo));
+    res.json(todos.save(todo).attributes);
   }).bodyParam("todo", "The Todo you want to create", Todo);
 
   /** Updates a Todo
