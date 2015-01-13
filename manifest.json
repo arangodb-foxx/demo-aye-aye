@@ -1,12 +1,16 @@
 {
   "name": "aye-aye",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "A ToDo-List Application.",
   "thumbnail": "images/todomvc.png",
   "author": "Michael Hackstein",
   "license": "Apache 2 License",
 
   "contributors": [
+    {
+      "name": "Michael Hackstein",
+      "email": "michael@arangodb.org"
+    },
     {
       "name": "Lucas Dohmen",
       "email": "lucas@arangodb.org"
@@ -15,7 +19,7 @@
 
   "repository": {
     "type": "git",
-    "url": "https://github.com/mchacki/aye-aye.git"
+    "url": "https://github.com/arangodb/aye-aye.git"
   },
 
   "keywords": [
@@ -24,7 +28,7 @@
   ],
 
   "engines": {
-    "arangodb": "1.4"
+    "arangodb": "2.4"
   },
 
   "controllers": {

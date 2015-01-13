@@ -30,17 +30,23 @@
 
 (function () {
   "use strict";
+
+  throw "banana";
   var Foxx = require("org/arangodb/foxx"),
     ArangoError = require("org/arangodb").ArangoError,
     Todos = require("./repositories/todos").Repository,
     Todo = require("./models/todo").Model,
     _ = require("underscore"),
+    joi = require('joi'),
+    todoId = {
+      type: joi.string().description("The id of the Todo-Item")
+    },
     controller,
     todos;
 
   controller = new Foxx.Controller(applicationContext);
 
-  todos = new Todos(controller.collection("todos"), {
+  todos = new Todos(applicationContext.collection("todos"), {
     model: Todo
   });
 
@@ -66,20 +72,22 @@
     res.json(todos.save(todo).attributes);
   }).bodyParam("todo", "The Todo you want to create", Todo);
 
+
+
+
+
+
   /** Updates a Todo
    *
    * Changes a Todo-Item. The information has to be in the
    * requestBody.
    */
-
   controller.put("/todos/:id", function (req, res) {
     var id = req.params("id"),
       todo = req.params("todo");
     res.json(todos.replaceById(id, todo));
-  }).pathParam("id", {
-    description: "The id of the Todo-Item",
-    type: "string"
-  }).bodyParam("todo", "The Todo you want your old one to be replaced with", Todo);
+  }).pathParam("id", todoId)
+  .bodyParam("todo", "The Todo you want your old one to be replaced with", Todo);
 
   /** Removes a Todo
    *
@@ -90,8 +98,6 @@
     var id = req.params("id");
     todos.removeById(id);
     res.json({ success: true });
-  }).pathParam("id", {
-    description: "The ID of the Todo-Item",
-    type: "string"
-  }).errorResponse(ArangoError, 404, "The document could not be found");
+  }).pathParam("id", todoId)
+  .errorResponse(ArangoError, 404, "The document could not be found");
 }());
