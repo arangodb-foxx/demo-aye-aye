@@ -31,7 +31,6 @@
 (function () {
   "use strict";
 
-  throw "banana";
   var Foxx = require("org/arangodb/foxx"),
     ArangoError = require("org/arangodb").ArangoError,
     Todos = require("./repositories/todos").Repository,
