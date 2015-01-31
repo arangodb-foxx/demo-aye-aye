@@ -69,11 +69,10 @@
   controller.post('/todos', function (req, res) {
     var todo = req.params("todo");
     res.json(todos.save(todo).attributes);
-  }).bodyParam("todo", "The Todo you want to create", Todo);
-
-
-
-
+  }).bodyParam("todo", { 
+    description: "The Todo you want to create", 
+    type: Todo 
+  });
 
 
   /** Updates a Todo
@@ -86,7 +85,10 @@
       todo = req.params("todo");
     res.json(todos.replaceById(id, todo));
   }).pathParam("id", todoId)
-  .bodyParam("todo", "The Todo you want your old one to be replaced with", Todo);
+  .bodyParam("todo", {
+    description: "The Todo you want your old one to be replaced with", 
+    type: Todo
+  });
 
   /** Removes a Todo
    *
