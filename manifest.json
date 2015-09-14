@@ -35,8 +35,10 @@
     "/ayeaye": "ayeaye.js"
   },
 
-  "setup": "scripts/setup.js",
-  "teardown": "scripts/teardown.js",
+  "scripts": {
+    "setup": "scripts/setup.js",
+    "teardown": "scripts/teardown.js"
+  },
 
   "assets": {
     "index.html": {
