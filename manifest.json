@@ -40,36 +40,9 @@
     "teardown": "scripts/teardown.js"
   },
 
-  "assets": {
-    "index.html": {
-      "files": [
-        "assets/index.html"
-      ]
-    },
-
-    "app.js": {
-      "files": [
-        "assets/components/js/underscore/**",
-        "assets/components/js/jquery/**",
-        "assets/components/js/backbone/**",
-        "assets/components/js/todomvc-common/**",
-        "assets/js/models/**",
-        "assets/js/collections/**",
-        "assets/js/views/**",
-        "assets/js/routers/**",
-        "assets/js/app.js"
-      ]
-    },
-
-    "components/todomvc-common/base.css": {
-      "files": [
-        "assets/components/todomvc-common/base.css"
-      ]
-    }
-  },
-
   "files": {
-    "/components" : "images"
+    "/": "files",
+    "/components": "images"
   },
 
   "lib": "."
