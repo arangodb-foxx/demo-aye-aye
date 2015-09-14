@@ -1,8 +1,8 @@
 {
   "name": "aye-aye",
-  "version": "1.3.0-alpha",
+  "version": "1.3.0",
   "description": "A ToDo-List Application.",
-  "thumbnail": "images/todomvc.png",
+  "thumbnail": "assets/images/todomvc.png",
   "author": "Michael Hackstein",
   "license": "Apache 2 License",
 
@@ -41,8 +41,7 @@
   },
 
   "files": {
-    "/": "files",
-    "/components": "images"
+    "/": "files"
   },
 
   "lib": "."

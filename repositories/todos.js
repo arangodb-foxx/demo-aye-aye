@@ -39,7 +39,7 @@
     // Display all elements in the collection
     all: function () {
       return _.map(this.collection.toArray(), function (rawTodo) {
-        var todo = new this.modelPrototype(rawTodo);
+        var todo = new this.model(rawTodo);
         return todo;
       }, this);
     }

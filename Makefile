@@ -8,6 +8,7 @@ assets:
 
 	test -d files/components/todomvc-common || mkdir -p files/components/todomvc-common
 	cp assets/components/todomvc-common/base.css files/components/todomvc-common/base.css
+	cp assets/components/todomvc-common/bg.png files/components/todomvc-common/bg.png
 
 	cat \
 	  assets/components/js/underscore/*.js \
