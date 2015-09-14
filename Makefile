@@ -19,4 +19,4 @@ assets:
 	  assets/js/views/*.js \
 	  assets/js/routers/*.js \
 	  assets/js/app.js \
-        > files/apps.js
+        > files/app.js
