@@ -1,48 +1,23 @@
 {
-  "name": "aye-aye",
-  "version": "1.3.0",
-  "description": "A ToDo-List Application.",
-  "thumbnail": "assets/images/todomvc.png",
-  "author": "Michael Hackstein",
-  "license": "Apache 2 License",
-
-  "contributors": [
-    {
-      "name": "Michael Hackstein",
-      "email": "michael@arangodb.org"
-    },
-    {
-      "name": "Lucas Dohmen",
-      "email": "lucas@arangodb.org"
-    }
-  ],
-
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arangodb-foxx/demo-aye-aye.git"
+  "name":"aye-aye",
+  "version":"1.4.0",
+  "description":"A ToDo-List Application.",
+  "thumbnail":"files/todomvc.png",
+  "author":"Michael Hackstein",
+  "license":"Apache 2 License",
+  "contributors":[{"name":"Michael Hackstein","email":"michael@arangodb.org"},{"name":"Lucas Dohmen","email":"lucas@arangodb.org"}],
+  "repository":{"type":"git","url":"https://github.com/arangodb-foxx/demo-aye-aye.git"},
+  "keywords":["todo","demo"],
+  "engines":{"arangodb":"^3.0.0"},
+  "main":"ayeaye.js",
+  "scripts":{"setup":"scripts/setup.js","teardown":"scripts/teardown.js"},
+  "defaultDocument":"index.html",
+  "files":{
+    "/index.html":{ "path": "files/index.html" },
+    "/app.js":{ "path": "files/app.js" },
+    "/todomvc.png":{ "path": "files/todomvc.png" },
+    "/components/todomvc-common/base.css": { "path":"files/components/todomvc-common/base.css" },
+    "/components/todomvc-common/bg.png": { "path":"files/components/todomvc-common/bg.png" }
   },
-
-  "keywords": [
-    "todo",
-    "demo"
-  ],
-
-  "engines": {
-    "arangodb": "^2.7.0"
-  },
-
-  "controllers": {
-    "/ayeaye": "ayeaye.js"
-  },
-
-  "scripts": {
-    "setup": "scripts/setup.js",
-    "teardown": "scripts/teardown.js"
-  },
-
-  "files": {
-    "/": "files"
-  },
-
-  "lib": "."
+  "lib":"."
 }

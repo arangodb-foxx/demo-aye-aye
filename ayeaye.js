@@ -1,5 +1,5 @@
 /*jslint indent: 2, nomen: true, maxlen: 100 */
-/*global require, applicationContext */
+/*global require */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A TODO-List Foxx-Application written for ArangoDB
@@ -30,33 +30,26 @@
 
 (function () {
   "use strict";
+  
+  const _ = require('lodash');
+  const createRouter = require('@arangodb/foxx/router');
+  const router = createRouter();
+  module.context.use(router);
 
-  var Foxx = require("org/arangodb/foxx"),
-    ArangoError = require("org/arangodb").ArangoError,
-    Todos = require("./repositories/todos").Repository,
-    Todo = require("./models/todo").Model,
-    _ = require("underscore"),
+  const todos = module.context.collection('todos');
+
+  var Todo = require("./models/todo").Model,
     joi = require('joi'),
-    todoId = {
-      type: joi.string().description("The id of the Todo-Item")
-    },
-    controller,
-    todos;
-
-  controller = new Foxx.Controller(applicationContext);
-
-  todos = new Todos(applicationContext.collection("todos"), {
-    model: Todo
-  });
+    todoId = joi.string().description("The id of the Todo-Item");
 
   /** Lists of all Todos
    *
    * This function simply returns the list of all todos.
    */
 
-  controller.get('/todos', function (req, res) {
-    res.json(_.map(todos.all(), function (todo) {
-      return todo.forClient();
+  router.get('/ayeaye/todos', function (req, res) {
+    res.json(_.map(todos.toArray(), function (todo) {
+      return _.omit(todo, [ '_rev', '_id', '_oldRev' ]);
     }));
   });
 
@@ -66,13 +59,9 @@
    * requestBody.
    */
 
-  controller.post('/todos', function (req, res) {
-    var todo = req.params("todo");
-    res.json(todos.save(todo).attributes);
-  }).bodyParam("todo", { 
-    description: "The Todo you want to create", 
-    type: Todo 
-  });
+  router.post('/ayeaye/todos', function (req, res) {
+    res.json(_.omit(todos.insert(req.body), [ '_rev', '_id' ]));
+  }).body(Todo);
 
 
   /** Updates a Todo
@@ -80,25 +69,17 @@
    * Changes a Todo-Item. The information has to be in the
    * requestBody.
    */
-  controller.put("/todos/:id", function (req, res) {
-    var id = req.params("id"),
-      todo = req.params("todo");
-    res.json(todos.replaceById(id, todo));
-  }).pathParam("id", todoId)
-  .bodyParam("todo", {
-    description: "The Todo you want your old one to be replaced with", 
-    type: Todo
-  });
+  router.put('/ayeaye/todos/:id', function (req, res) {
+    res.json(_.omit(todos.replace(req.param("id"), req.body), [ '_rev', '_id', '_oldRev' ]));
+  }).pathParam("id", todoId).body(Todo);
 
   /** Removes a Todo
    *
    * Removes a Todo-Item.
    */
 
-  controller.del("/todos/:id", function (req, res) {
-    var id = req.params("id");
-    todos.removeById(id);
+  router.delete('/ayeaye/todos/:id', function (req, res) {
+    todos.remove(req.param("id"));
     res.json({ success: true });
-  }).pathParam("id", todoId)
-  .errorResponse(ArangoError, 404, "The document could not be found");
+  }).pathParam("id", todoId);
 }());
